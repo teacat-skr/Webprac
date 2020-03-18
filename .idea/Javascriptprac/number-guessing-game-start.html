@@ -53,23 +53,30 @@
             let guessCount = 1;
             let resetButton;
             //回数とリセットボタンの追加位置の生成
+            guessField.focus();
+            //入力フォームにクリックすることなく入力が始められるようにカーソルを置くことができる
             function checkGuess() {
                 //関数は普通に定義できる
                 let userGuess = Number(guessField.value);
+                //入力した値をセット、Number()で数値であることを担保
                 if (guessCount === 1) {
                     guesses.textContent = '前回の予想: ';
+                    //初回だけ文字列の先頭につけるため代入
                 }
                 guesses.textContent += userGuess + ' ';
-
+                //文字列に今までの数値を結合
                 if (userGuess === randomNumber) {
+                    //正解への分岐
                     lastResult.textContent = 'おめでとう! 正解です!';
                     lastResult.style.backgroundColor = 'green';
                     lowOrHi.textContent = '';
                     setGameOver();
                 } else if (guessCount === 10) {
+                    //回数で終了
                     lastResult.textContent = '!!!ゲームオーバー!!!';
                     setGameOver();
                 } else {
+                    //つぎの回へ
                     lastResult.textContent = '間違いです!';
                     lastResult.style.backgroundColor = 'red';
                     if(userGuess < randomNumber) {
@@ -81,8 +88,46 @@
 
                 guessCount++;
                 guessField.value = '';
+                //次の入力のため初期化
                 guessField.focus();
             }
+            guessSubmit.addEventListener('click', checkGuess);
+            //イベントリスナー。起こったイベントに対して実行する関数を設定
+            function setGameOver() {
+                guessField.disabled = true;
+                guessSubmit.disabled = true;
+                //disabledプロパティをtrueにして入力を無効化
+                resetButton = document.createElement('button');
+                resetButton.textContent = '新しいゲームを始める';
+                document.body.appendChild(resetButton);
+                //リセットボタンを追加
+                resetButton.addEventListener('click', resetGame);
+                //リセットボタンのイベントリスナー
+            }
+            function resetGame() {
+                guessCount = 1;
+                //回数の初期化
+                var resetParas = document.querySelectorAll('.resultParas p');
+                //resetParas属性を持つdivの中のp要素の位置を配列で取得
+                for (var i = 0 ; i < resetParas.length ; i++) {
+                    resetParas[i].textContent = '';
+                    //段落すべてを削除
+                }
+
+                resetButton.parentNode.removeChild(resetButton);
+                //リセットボタンを削除
+                guessField.disabled = false;
+                guessSubmit.disabled = false;
+                //入力を使用可能にする
+                guessField.value = '';
+                guessField.focus();
+                //入力のため初期化
+                lastResult.style.backgroundColor = 'white';
+                //最終結果の背景を白に戻す
+                randomNumber = Math.floor(Math.random() * 100) + 1;
+                //ランダムな数値を生成
+            }
+
         </script>
     </body>
 </html>
