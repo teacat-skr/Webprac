@@ -77,3 +77,85 @@ eval('3+2');
 console.log();
 //コンソールに表示
 
+//文法とデータ型
+//jsはUnicodeなので個本何でも変数名に使える
+//strictモードで見宣言の変数のエラーを出せる
+//初期化していない変数はundefinedになる
+//未宣言の変数はReferenceError
+//undefinesはfalse扱い。数値のコンテキストではNaN扱い
+//nullもfalse扱い。数値コンテキストでは0扱い
+if(true){
+    var x = 5;
+}
+console.log(x);
+//varの場合ブロックすこーうが存在しないのでc++とは結果が変わる({}内もグローバルスコープ扱い)
+//letだと{}内はローカルスコープ
+//関数は巻き上げが行われるが、無名関数は行われない
+//グローバル変数はグローバルオブジェクトのプロパティなので別なウインドウからウインドウ名などを指定すればアクセスできる
+const MY_OBJ = {'key': 'value'};
+MY_OBJ.key = 'OtherValue';
+//定数でもプロパティは書き換えられる
+//定数の配列に値の追加も可
+//長整数型BigInt、固有のインスタンスがつくれるSymbol型もある
++'1.1' + +'1.1'
+//数値型の2.2になる
+var fish = ['Lion', , 'Angel'];
+//配列リテラルは未定義の要素をundefinedとする
+//真偽値型とは別にBooleanオブジェクトがある
+//数値リテラルは一般的な方法で2,8,10,16進数が使える
+/*浮動小数点リテラルは
+3.1415926
+-.123456789
+-3.1E+12
+.1e-23
+のようなものが使える
+ */
+let car = {manyCars: {a: 'Saab', b: 'Jeep'}, 7:'Mazda'};
+//オブジェクトリテラル。入れ子にできる
+let unusualPropertyNames = {
+    '' : '空文字列',
+    '!': 'バン!'
+}
+car.manyCars.a;
+//普通のプロパティへのアクセス
+car["7"];
+unusualPropertyNames[""];
+unusualPropertyNames['!'];
+//有効でない識別子のプロパティへのアクセスはクオートで囲んで連想配列のように呼び出す
+var re = /ab+c/;
+//正規表現リテラル
+/*文字列リテラル
+'foo'
+"bar"
+'1234'
+'one line \n another line'
+"John's cat"
+ */
+'abc'.length;
+//文字列リテラルは一時的なstringオブジェクトに変換されるのであらゆるメソッドが使える
+//``で囲むテンプレートリテラルは変数を埋め込める(PHPの""と似てる?)
+//エスケープ文字も使える
+var str = 'this string \
+is broken \
+across multiple \
+lines.'
+console.log(str);
+//改行をエスケープできる。見やすくなる
+var poem =
+    'Roses are red,\n\
+    Violets are blue.\n\
+    Sugar is sweet,\n\
+    and so is foo.'
+//ヒアドキュメント的な書き方
+var poem = `a
+b
+c`;
+//改行が適応される
+
+//制御フローとエラー処理
+//if文,switch文はc++と同様
+//ほぼどんなオブジェクトでも例外としてスローできるが例外データ型を使った方が効率的な場合がある
+//try catch throwはphpのように使える
+//throwはfinallyのreturnで上書きされる。
+//Errorオブジェクトを作りプロパティを変更することもできる
+//同期制御をするためのPromiseオブジェクトというものもあり、状態を持つ
