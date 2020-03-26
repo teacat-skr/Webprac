@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Webprac.iml" filepath="$PROJECT_DIR$/.idea/Webprac.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Symfonyprac.iml" filepath="$PROJECT_DIR$/Symfonyprac.iml" />
     </modules>
   </component>
 </project>
