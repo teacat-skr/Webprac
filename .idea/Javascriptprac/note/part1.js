@@ -159,3 +159,18 @@ c`;
 //throwはfinallyのreturnで上書きされる。
 //Errorオブジェクトを作りプロパティを変更することもできる
 //同期制御をするためのPromiseオブジェクトというものもあり、状態を持つ
+
+//ループと反復処理
+//for,do while,whileはほぼc++と同様
+label:
+for (let i = 0; i < 4; i++)break label;
+//ラベルを付けるとbreak,continueで指定すれば多重ループから簡単に抜けられる
+for (var i in obj)console.log(i + '=>' + obj[i]);
+//オブジェクトのプロパティをたどれる
+const arr = [3, 5, 7];
+arr.foo = 'hello';
+for (let i in arr)console.log(i);
+//0, 1, 2, fooが出力
+for(let i of arr)console.log(i);
+//3, 5, 7が出力
+//helloが出力されないのは反復不可能だから?
